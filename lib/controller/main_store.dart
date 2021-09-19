@@ -42,8 +42,6 @@ abstract class _MainStore with Store {
         Map<String, dynamic> userMap = json.decode(string);
         dataBase = Data.fromJson(userMap);
 
-        dataBase = CarregarDadosBase(appVersion).loadBaseGame();
-
         // appVersion = 1.8;
         //substituir por verificar versão
         if (appVersion > dataBase.appVersion) {
