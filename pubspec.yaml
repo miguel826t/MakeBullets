@@ -63,6 +63,7 @@ flutter:
     - sounds/PerkSound.mp3
     - sounds/ClickSound.mp3
     - images/MainFactory.png
+    - images/MainBullet.png
     - images/bulletHole1.png
     - images/bulletHole2.png
     - images/bulletHole3.png
@@ -77,6 +78,16 @@ flutter:
     - images/DesertEagle.png
     - images/Beretta.png
     - images/M1911.png
+    - images/P2000.png
+    - images/USP-S.png
+    - images/P250.png
+    - images/Tec-9.png
+    - images/Escopetas.png
+    - images/S1986.png
+    - images/benelli_m4.png
+    - images/S12K.png
+    - images/ksg.png
+    - images/Atchisson.png
     - images/Fuzis.png
     - images/M4A1.png
     - images/M4A4.png
@@ -86,6 +97,29 @@ flutter:
     - images/SCARH.png
     - images/SG-553.png
     - images/TAR-21.png
+    - images/IA2.png
+    - images/AUG.png
+    - images/FAMAS.png
+    - images/X80P.png
+    - images/m4-PRO.png
+    - images/SubMetralhadoras.png
+    - images/MC10.png
+    - images/PPbizon.png
+    - images/MP5.png
+    - images/MP7.png
+    - images/Colt9.png
+    - images/UMP45.png
+    - images/P90.png
+    - images/MP5-PRO.png
+    - images/Snipers.png
+    - images/M14.png
+    - images/M24.png
+    - images/Dragunov.png
+    - images/FNAR.png
+    - images/SR25.png
+    - images/AWP.png
+    - images/FN.png
+    - images/Savage.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

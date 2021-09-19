@@ -13,8 +13,7 @@ part 'main_store.g.dart';
 class MainStore = _MainStore with _$MainStore;
 
 abstract class _MainStore with Store {
-  var _numberFormat = NumberFormat.simpleCurrency(locale: "pt_BR");
-  double appVersion = 1.4;
+  double appVersion = 1.5;
 
   @observable
   Data dataBase = Data();
@@ -25,7 +24,6 @@ abstract class _MainStore with Store {
   _MainStore() {
     _readData().then((string) {
       if (string == "null") {
-        appVersion = 1.0;
         dataBase = CarregarDadosBase(appVersion).loadBaseGame();
         _saveData();
 
@@ -44,7 +42,9 @@ abstract class _MainStore with Store {
         Map<String, dynamic> userMap = json.decode(string);
         dataBase = Data.fromJson(userMap);
 
-        // appVersion = 1.2;
+        dataBase = CarregarDadosBase(appVersion).loadBaseGame();
+
+        // appVersion = 1.8;
         //substituir por verificar versão
         if (appVersion > dataBase.appVersion) {
           //dataBase = CarregarDadosBase(dataBase.appVersion).loadAtt(dataBase);
@@ -88,6 +88,18 @@ abstract class _MainStore with Store {
     dataBase.money += dataBase.gun.price + (buff.toInt());
     setMoney(dataBase.money);
   }
+
+  void incrementGoldBullet(){
+    var buff = 0;
+    dataBase.goldBullet += 1 + buff;
+  }
+
+  void setGoldBullet(int value){
+    dataBase.goldBullet = value;
+    dataBase = dataBase;
+    _saveData();
+  }
+
 
   Future<void> clickCalc() async {
     await Future.doWhile(() async {

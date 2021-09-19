@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:makebulletsbeta/controller/main_store.dart';
 import 'package:makebulletsbeta/screen/gunType_tab.dart';
 import 'package:makebulletsbeta/screen/update_tab.dart';
+import 'package:makebulletsbeta/widgets/mainFactory.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
@@ -22,10 +23,6 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
   PageController _pageController = PageController();
   int _pag = 0;
   late MainStore mainStore;
-  bool _limitaClick = true;
-  bool _animation = true;
-  double _height = 300.0;
-  double _width = 300.0;
 
 //Metodo de inicio************************************************************
   @override
@@ -65,6 +62,21 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               ),
               Image.asset(
                 'images/Bullet1-Back.png',
+                fit: BoxFit.fill,
+                height: 30,
+                width: 30,
+              ),
+              Container(
+                padding: const EdgeInsets.fromLTRB(50, 10, 0, 0),
+                child: Observer(builder:(_) {
+                  return Text(
+                    _numberFormat.format(mainStore.dataBase.goldBullet),
+                    style: TextStyle(color: Colors.amber, fontSize: 22.0),
+                  );
+                }),
+              ),
+              Image.asset(
+                'images/MainBullet.png',
                 fit: BoxFit.fill,
                 height: 30,
                 width: 30,
@@ -110,37 +122,9 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
           });
         },
         children: [
-          MaterialButton(
-            padding: EdgeInsets.all(0.0),
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            onPressed: () {
-              setState(() {
-                if (_animation) {
-                  _animation = false;
-                  _height = 320;
-                  _width = 320;
-                  mainStore.incrementMoney();
-                } else {
-                  _animation = true;
-                  _height = 280.0;
-                  _width = 280.0;
-                  //   mainStore.incrementMoney();
-                }
-              });
-            },
-            child: Center(
-              child: Image.asset(
-                'images/MainFactory.png',
-                height: _height,
-                width: _width,
-              ),
-            ),
-          ),
-          Container(
-            child: UpdateTab(),
-          ),
-          Container(child: GunTypeTab()),
+          MainFactory(),
+          UpdateTab(),
+          GunTypeTab(),
         ],
       ),
     );

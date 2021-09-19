@@ -6,6 +6,7 @@ import 'gunType.dart';
 
 class Data {
   int money = 0;
+  int goldBullet = 0;
   Gun gun = Gun();
   Perk perk = Perk();
   List<GunType> gunType = [];
@@ -19,6 +20,7 @@ class Data {
   Data.fromJson(Map<String, dynamic> json) {
     try{
       money = json['money'];
+      goldBullet = json['goldBullet'];
       gun = (json['gun'] != null ? new Gun.fromJson(json['gun']) : Gun());
       perk = (json['perk'] != null ? new Perk.fromJson(json['perk']) : Perk());
       if (json['gunType'] != null) {
@@ -35,6 +37,7 @@ class Data {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['money'] = this.money;
+    data['goldBullet'] = this.goldBullet;
     if (this.gun != null) {
       data['gun'] = this.gun.toJson();
     }

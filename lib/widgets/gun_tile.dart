@@ -21,13 +21,14 @@ class GunTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     MainStore mainStore = Provider.of<MainStore>(context);
-    _gunIndex = gun.id - 2;
+    _gunIndex = gun.id-1;
     _gunTypeIndex = gun.gunTypeId;
     if(_gunIndex < 0){
-      _gunIndex = 0;
       _gunTypeIndex -= 1;
+      _gunIndex = 0;
       if(_gunTypeIndex < 0){
         _gunTypeIndex = 0;
+        _gunIndex=0;
       }
     }
     _gunAnt = mainStore.dataBase.gunType[_gunTypeIndex].gun[_gunIndex].lock;
@@ -48,11 +49,11 @@ class GunTile extends StatelessWidget {
         ],
       ),
       title: Text(gun.title + " (${gun.perk.porcBuff}%)"),
-      subtitle: Text("+R\$ ${gun.price}" +
+      subtitle: Text("Produz: ${gun.price}" +
           " + ${gun.price * (gun.perk.porcBuff + PorcClass) ~/ 100}"),
       trailing: Container(
         padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
-        width: 120,
+        width: 128,
         height: 35,
         child: ElevatedButton.icon(
           onPressed: gun.lock || !_gunAnt
@@ -89,9 +90,11 @@ class GunTile extends StatelessWidget {
             ),
           ),
           icon: Icon(Icons.shopping_cart),
-          label: Text(
-            _numberFormat.format(gun.priceToUnlock),
-            style: TextStyle(color: Colors.black, fontSize: 15),
+          label: Flexible(
+            child: Text(
+              _numberFormat.format(gun.priceToUnlock),
+              style: TextStyle(color: Colors.black, fontSize: 14),
+            ),
           ),
         ),
       ),
