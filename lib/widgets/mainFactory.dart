@@ -14,11 +14,16 @@ class _MainFactoryState extends State<MainFactory>
   double _size = 90.0;
   double _imgSize = 300;
   double _end = 0.00;
+  double _velo = 0.02;
   bool _click = true;
+
 
   @override
   Widget build(BuildContext context) {
     MainStore mainStore = Provider.of<MainStore>(context);
+    if(mainStore.dataBase.goldPerks.length > 0){
+      _velo = (mainStore.dataBase.goldPerks.elementAt(1).porcBuff / 100);
+    }
     return Center(
         child: TweenAnimationBuilder(
             tween: Tween(begin: 0.0, end: _end),
@@ -38,7 +43,7 @@ class _MainFactoryState extends State<MainFactory>
                       if (_click == true) {
                         _click = false;
                         Future.delayed(Duration(milliseconds: 100), () {
-                          _end = _end <= 1.0 ? _end += 0.01 : _end = 0.00;
+                          _end = _end <= 1.0 ? _end += _velo : _end = 0.00;
                           if (_end == 0.0) {
                             mainStore.incrementGoldBullet();
                           }

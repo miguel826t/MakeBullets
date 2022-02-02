@@ -27,8 +27,6 @@ abstract class _MainStore with Store {
         dataBase = CarregarDadosBase(appVersion).loadBaseGame();
         _saveData();
 
-        //dataBase.money = 150000;
-
         //global 0
         perks.add(dataBase.perk);
         //Arma 1
@@ -50,17 +48,19 @@ abstract class _MainStore with Store {
           _saveData();
         }
 
-        //dataBase.money = 150000;
 
+        dataBase = CarregarDadosBase(appVersion).loadBaseGame();
+        dataBase.money = 15000000;
+        dataBase.goldBullet = 1000;
         //global 0
-        dataBase.perk.urlImag = 'images/MainFactory.png';
+      //  dataBase.perk.urlImag = 'images/MainFactory.png';
         perks.add(dataBase.perk);
         //Arma 1
-        dataBase.gun.perk.urlImag = dataBase.gun.urlImag;
-        perks.add(dataBase.gun.perk);
+      //  dataBase.gun.perk.urlImag = dataBase.gun.urlImag;
+        perks.add(dataBase.gunType[dataBase.gun.gunTypeId].gun[dataBase.gun.id].perk);
         //Class 2
-        dataBase.gunType[dataBase.gun.gunTypeId].perk.urlImag =
-            dataBase.gunType[dataBase.gun.gunTypeId].urlImag;
+      //  dataBase.gunType[dataBase.gun.gunTypeId].perk.urlImag =
+      //      dataBase.gunType[dataBase.gun.gunTypeId].urlImag;
         perks.add(dataBase.gunType[dataBase.gun.gunTypeId].perk);
 
         clickCalc();
@@ -88,8 +88,8 @@ abstract class _MainStore with Store {
   }
 
   void incrementGoldBullet(){
-    var buff = 0;
-    dataBase.goldBullet += 1 + buff;
+    var buff = dataBase.goldPerks[0].porcBuff;
+    dataBase.goldBullet += 1 + buff.toInt();
   }
 
   void setGoldBullet(int value){

@@ -5,12 +5,12 @@ import 'package:makebulletsbeta/controller/main_store.dart';
 import 'package:makebulletsbeta/entities/perk.dart';
 import 'package:provider/provider.dart';
 
-class UpdateTile extends StatelessWidget {
+class UpdateGoldTile extends StatelessWidget {
   Perk perk = Perk();
   var _numberFormat =
   NumberFormat.simpleCurrency(decimalDigits: 0, name: "", locale: "pt_BR");
 
-  UpdateTile(this.perk);
+  UpdateGoldTile(this.perk);
 
   AudioPlayer player = AudioPlayer();
   bool maxLevel = false;
@@ -20,13 +20,13 @@ class UpdateTile extends StatelessWidget {
     MainStore mainStore = Provider.of<MainStore>(context);
     maxLevel = perk.nivel == perk.maxUpdt;
     return ElevatedButton(
-      onPressed: mainStore.dataBase.money < perk.price || maxLevel ? null :(){
-        if(mainStore.dataBase.money >= perk.price){
+      onPressed: mainStore.dataBase.goldBullet < perk.price || maxLevel ? null :(){
+        if(mainStore.dataBase.goldBullet >= perk.price){
           perk.nivel += 1;
-          mainStore.dataBase.money -= perk.price;
-          perk.price = (perk.price * 1.2).toInt();
+          mainStore.dataBase.goldBullet -= perk.price;
+          perk.price = (perk.price * 1.8).toInt();
           perk.porcBuff += perk.procAument;
-          mainStore.setMoney(mainStore.dataBase.money);
+          mainStore.setMoney(mainStore.dataBase.goldBullet);
           mainStore.setPerk();
           playSound();
           (context as Element).markNeedsBuild();
@@ -59,7 +59,7 @@ class UpdateTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "(${perk.porcBuff}%)",
+                  "+${perk.porcBuff}",
                   style: TextStyle(color: Colors.black, fontSize: 18),
                 ),
                 Container(
@@ -83,10 +83,10 @@ class UpdateTile extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.fromLTRB(0, 10, 5, 2),
                     child: Text(getUpdtPrice(),
-                        style: TextStyle(color: getColor(mainStore.dataBase.money), fontSize: 17)),
+                        style: TextStyle(color: getColor(mainStore.dataBase.goldBullet), fontSize: 17)),
                   ),
                   Image.asset(
-                    'images/Bullet1-Back.png',
+                    'images/MainBullet.png',
                     fit: BoxFit.fill,
                     height: 25,
                     width: 25,
@@ -112,13 +112,12 @@ class UpdateTile extends StatelessWidget {
     return Colors.black;
   }
 
-  String getUpdtPrice(){
-    if(maxLevel){
+  String getUpdtPrice() {
+    if (maxLevel) {
       return "Máximo";
-    }else{
+    } else {
       return _numberFormat.format(perk.price);
     }
-
   }
 
 }

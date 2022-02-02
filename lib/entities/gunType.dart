@@ -8,9 +8,8 @@ class GunType {
   Perk perk = Perk();
   List<Gun> gun = [];
   String urlImag = "";
-  GunType(){
 
-  }
+  GunType();
  // GunType({this.id, this.title, this.perk, this.gun});
 
   GunType.fromJson(Map<String, dynamic> json) {

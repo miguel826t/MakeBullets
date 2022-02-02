@@ -10,9 +10,7 @@ class Gun {
   String urlImag = "";
   Perk perk = Perk();
 
-  Gun(){
-
-  }
+  Gun();
   //Gun({this.id, this.title, this.price, this.lock, this.gunTypeId, this.perk});
 
   Gun.fromJson(Map<String, dynamic> json) {
